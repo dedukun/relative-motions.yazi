@@ -32,7 +32,7 @@ local function get_cmd(first_char)
 
 	-- command direction
 	local direction
-	if last_key == "d" or last_key == "y" or last_key == "x" then
+	if last_key == "g" or last_key == "d" or last_key == "y" or last_key == "x" then
 		DIRECTION_KEYS[#DIRECTION_KEYS + 1] = {
 			on = last_key,
 		}
@@ -62,9 +62,21 @@ return {
 		end
 
 		if cmd == "g" then
-			ya.manager_emit("arrow", { -99999999 })
-			ya.manager_emit("arrow", { lines - 1 })
-		elseif cmd == "j" then
+			if direction == "g" then
+				ya.manager_emit("arrow", { -99999999 })
+				ya.manager_emit("arrow", { lines - 1 })
+				return
+			elseif direction == "j" then
+				cmd = "j"
+			elseif direction == "k" then
+				cmd = "k"
+			else
+				-- no valid direction
+				return
+			end
+		end
+
+		if cmd == "j" then
 			ya.manager_emit("arrow", { lines })
 		elseif cmd == "k" then
 			ya.manager_emit("arrow", { -lines })
