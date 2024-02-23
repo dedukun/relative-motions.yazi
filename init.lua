@@ -20,6 +20,8 @@ local DIRECTION_KEYS = {
 local render_setup = ya.sync(function()
 	ya.render()
 
+	Status.motion = function(self) end
+
 	Status.render = function(self, area)
 		self.area = area
 
@@ -55,6 +57,43 @@ local render_motion = ya.sync(function(_, motion_num, motion_cmd)
 			motion_span,
 			ui.Span(THEME.status.separator_close):fg(style.bg),
 			ui.Span(" "),
+		})
+	end
+end)
+
+local render_numbers = ya.sync(function(_)
+	ya.render()
+
+	function Folder:icon(file)
+		local folder = Folder:by_kind(Folder.CURRENT)
+		local idx, hovered
+		if folder then
+			for i, f in ipairs(folder.window) do
+				if f:is_hovered() then
+					hovered = i
+				end
+
+				if f.url == file.url then
+					idx = i
+				end
+			end
+		end
+
+		local icon = file:icon()
+		if not idx then
+			return icon and ui.Span(" " .. icon.text .. " "):style(icon.style) or ui.Span("")
+		end
+
+		local index
+		if hovered == idx then
+			index = idx
+		else
+			index = math.abs(idx - hovered)
+		end
+
+		return ui.Line({
+			ui.Span(string.format("%2d ", index)),
+			icon and ui.Span(" " .. icon.text .. " "):style(icon.style) or ui.Span(""),
 		})
 	end
 end)
@@ -113,6 +152,7 @@ return {
 			return
 		end
 
+		render_numbers()
 		render_setup()
 		local lines, cmd, direction = get_cmd(arg)
 		if not lines or not cmd then
