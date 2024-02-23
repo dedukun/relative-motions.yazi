@@ -20,7 +20,7 @@ git clone https://github.com/dedukun/relative-motions.yazi.git %AppData%\yazi\co
 If you want to use the numbers directly to start a motion add this to your `keymap.toml`:
 
 <details>
-  
+
 ```toml
 [[manager.prepend_keymap]]
 on = [ "1" ]
@@ -81,27 +81,28 @@ desc = "Trigger a new relative motion"
 
 ---
 
-Additionally if you want to have numbers showing on the side of the files, add the following to `init.lua`:
+Additionally there are a couple of initial configurations that can be given at setup:
+
+| Configuration  | Values                           | Default    | Description                                             |
+| -------------- | -------------------------------- | ---------- | ------------------------------------------------------- |
+| `show_numbers` | `relative`, `absolute` or `none` | `relative` | Shows relative or absolute numbers before the file icon |
+| `show_motion`  | `true` or `false`                | `false`    | Shows current motion in Status bar                      |
+
+The following is an exemple configurations that show absolute numbers, as well as the motions,
+which must be added to `init.lua`:
 
 ```lua
-require("relative-motions"):setup({show_numbers="relative"})
+require("relative-motions"):setup({show_numbers="absolute", show_motion = true})
 ```
 
-The `show_numbers` variable supports the following values:
-
-| Value               | Description             |
-| ------------------- | ----------------------- |
-| `relative` or `rel` | Shows relative numbers  |
-| `absolute` or `abs` | Shows absolute numbers  |
-| `none`              | Doesn't show any number |
-
 > [!NOTE]
-> This functionality overwrites [`Folder:icon`](https://github.com/sxyazi/yazi/blob/e51e8ad789914b2ab4a9485da7aa7fbc7b3bb450/yazi-plugin/preset/components/folder.lua#L17),
-> so if you are already modifying this function you may encouter some issues.
+> The `show_numbers` functionality overwrites [`Folder:icon`](https://github.com/sxyazi/yazi/blob/e51e8ad789914b2ab4a9485da7aa7fbc7b3bb450/yazi-plugin/preset/components/folder.lua#L17)
+> and `show_motion` adds a new `Status.motions` and modifies `Status.render`,
+> so if you are already modifying using any of this functions you will encounter some issues.
 
 ## Usage
 
-This plugin adds the some basic vim motions like `3k`, `12j`, `10gg`, etc. 
+This plugin adds the some basic vim motions like `3k`, `12j`, `10gg`, etc.
 The following table show all the available motions:
 
 | Command | Description       |
@@ -111,7 +112,6 @@ The following table show all the available motions:
 | `gj`    | Go `x` lines down |
 | `gk`    | Go `x` lines up   |
 | `gg`    | Go to line        |
-
 
 Furthermore, the following operations were also added:
 

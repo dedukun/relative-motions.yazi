@@ -20,7 +20,7 @@ local SHOW_NUMBERS_RELATIVE = 1
 ----------------- R E N D E R -----------------
 -----------------------------------------------
 
-local render_setup = ya.sync(function()
+local render_motion_setup = ya.sync(function()
 	ya.render()
 
 	Status.motion = function(self) end
@@ -163,7 +163,6 @@ return {
 			end
 		end
 
-		render_setup()
 		local lines, cmd, direction = get_cmd(initial_value)
 		if not lines or not cmd then
 			-- command was cancelled
@@ -213,8 +212,16 @@ return {
 
 		render_clear()
 	end,
-	setup = function(_, args)
-		if not args or not args["show_numbers"] then
+	setup = function(state, args)
+		if not args then
+			render_numbers(SHOW_NUMBERS_RELATIVE)
+		end
+
+		if args["show_motion"] then
+			render_motion_setup()
+		end
+
+		if not args["show_numbers"] then
 			render_numbers(SHOW_NUMBERS_RELATIVE)
 		elseif args["show_numbers"] == "abs" or args["show_numbers"] == "absolute" then
 			render_numbers(SHOW_NUMBERS_ABSOLUTE)
