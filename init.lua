@@ -132,7 +132,7 @@ local function get_cmd(first_char)
 
 	-- command direction
 	local direction
-	if last_key == "g" or last_key == "d" or last_key == "y" or last_key == "x" then
+	if last_key == "g" or last_key == "v" or last_key == "d" or last_key == "y" or last_key == "x" then
 		DIRECTION_KEYS[#DIRECTION_KEYS + 1] = {
 			on = last_key,
 		}
