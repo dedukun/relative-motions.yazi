@@ -13,6 +13,9 @@ local DIRECTION_KEYS = {
 	{ on = "j"}, { on = "k"}
 }
 
+local SHOW_NUMBERS_ABSOLUTE = 0
+local SHOW_NUMBERS_RELATIVE = 1
+
 -----------------------------------------------
 ----------------- R E N D E R -----------------
 -----------------------------------------------
@@ -61,7 +64,7 @@ local render_motion = ya.sync(function(_, motion_num, motion_cmd)
 	end
 end)
 
-local render_numbers = ya.sync(function(_)
+local render_numbers = ya.sync(function(_, mode)
 	ya.render()
 
 	function Folder:icon(file)
@@ -85,10 +88,10 @@ local render_numbers = ya.sync(function(_)
 		end
 
 		local index
-		if hovered == idx then
+		if mode == SHOW_NUMBERS_ABSOLUTE then
 			index = idx
 		else
-			index = math.abs(idx - hovered)
+			index = hovered == idx and idx or math.abs(idx - hovered)
 		end
 
 		return ui.Line({
@@ -152,7 +155,6 @@ return {
 			return
 		end
 
-		render_numbers()
 		render_setup()
 		local lines, cmd, direction = get_cmd(arg)
 		if not lines or not cmd then
@@ -202,5 +204,16 @@ return {
 		end
 
 		render_clear()
+	end,
+	setup = function(_, args)
+		if not args or not args["show_numbers"] then
+			render_numbers(SHOW_NUMBERS_RELATIVE)
+		elseif args["show_numbers"] == "abs" or args["show_numbers"] == "absolute" then
+			render_numbers(SHOW_NUMBERS_ABSOLUTE)
+		elseif args["show_numbers"] == "rel" or args["show_numbers"] == "relative" then
+			render_numbers(SHOW_NUMBERS_RELATIVE)
+		else
+			render_numbers(SHOW_NUMBERS_RELATIVE)
+		end
 	end,
 }
