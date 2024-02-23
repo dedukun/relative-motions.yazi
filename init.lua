@@ -111,7 +111,7 @@ end
 
 local function get_cmd(first_char)
 	local last_key
-	local lines = first_char
+	local lines = first_char or ""
 
 	while true do
 		render_motion(tonumber(lines))
@@ -149,14 +149,18 @@ end
 
 return {
 	entry = function(_, args)
+		local initial_value
+
 		-- this is checking if the argument is a valid number
-		local arg = tostring(tonumber(args[1]))
-		if arg == "nil" then
-			return
+		if args then
+			initial_value = tostring(tonumber(args[1]))
+			if initial_value == "nil" then
+				return
+			end
 		end
 
 		render_setup()
-		local lines, cmd, direction = get_cmd(arg)
+		local lines, cmd, direction = get_cmd(initial_value)
 		if not lines or not cmd then
 			-- command was cancelled
 			render_clear()
@@ -212,6 +216,8 @@ return {
 			render_numbers(SHOW_NUMBERS_ABSOLUTE)
 		elseif args["show_numbers"] == "rel" or args["show_numbers"] == "relative" then
 			render_numbers(SHOW_NUMBERS_RELATIVE)
+		elseif args["show_numbers"] == "none" then
+			return
 		else
 			render_numbers(SHOW_NUMBERS_RELATIVE)
 		end
