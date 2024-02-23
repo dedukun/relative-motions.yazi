@@ -15,34 +15,12 @@ git clone https://github.com/dedukun/relative-motions.yazi.git ~/.config/yazi/pl
 git clone https://github.com/dedukun/relative-motions.yazi.git %AppData%\yazi\config\plugins\relative-motions.yazi
 ```
 
-## Usage
-
-This plugin adds the basic vim motions:
-
-| Command | Description       |
-| ------- | ----------------- |
-| `j`     | Move `x` down     |
-| `k`     | Move `x` up       |
-| `gj`    | Go `x` lines down |
-| `gk`    | Go `x` lines up   |
-| `gg`    | Go to line        |
-
-As well as some common operations:
-
-| Command | Description   |
-| ------- | ------------- |
-| `v`     | visual select |
-| `y`     | Yank          |
-| `x`     | Cut           |
-| `d`     | Delete motion |
-
-This however must be followed by a direction, which can be `j`, `k` or repeating the key,
-which will default to `j`.
-
 ## Configuration
 
-Add this to your `keymap.toml`:
+If you want to use the numbers directly to start a motion add this to your `keymap.toml`:
 
+<details>
+  
 ```toml
 [[manager.prepend_keymap]]
 on = [ "1" ]
@@ -90,7 +68,20 @@ exec = "plugin relative-motions --args=9"
 desc = "Move in relative steps"
 ```
 
-If you want to have numbers showing on the side of the files, add the following to `init.lua`:
+</details>
+
+Alternatively you can use a key to trigger a new motion, for that add the following in `keymap.toml`:
+
+```lua
+[[manager.prepend_keymap]]
+on = [ "9" ]
+exec = "plugin relative-motions"
+desc = "Trigger a new relative motion"
+```
+
+---
+
+Additionally if you want to have numbers showing on the side of the files, add the following to `init.lua`:
 
 ```lua
 require("relative-motions"):setup({show_numbers="relative"})
@@ -107,3 +98,27 @@ The `show_numbers` variable supports the following values:
 > [!NOTE]
 > This function overwrites [`Folder:icon`](https://github.com/sxyazi/yazi/blob/e51e8ad789914b2ab4a9485da7aa7fbc7b3bb450/yazi-plugin/preset/components/folder.lua#L17),
 > so if you are already modifying this function you may encouter some issues.
+
+## Usage
+
+This plugin adds the basic vim motions:
+
+| Command | Description       |
+| ------- | ----------------- |
+| `j`     | Move `x` down     |
+| `k`     | Move `x` up       |
+| `gj`    | Go `x` lines down |
+| `gk`    | Go `x` lines up   |
+| `gg`    | Go to line        |
+
+As well as some common operations:
+
+| Command | Description   |
+| ------- | ------------- |
+| `v`     | visual select |
+| `y`     | Yank          |
+| `x`     | Cut           |
+| `d`     | Delete motion |
+
+This must be followed by a direction, which can be `j`, `k` or repeating the command key,
+which will default the direction down, e.g. `2yy` will copy two lines down.
