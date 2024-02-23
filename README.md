@@ -101,7 +101,8 @@ The `show_numbers` variable supports the following values:
 
 ## Usage
 
-This plugin adds the basic vim motions:
+This plugin adds the some basic vim motions like `3k`, `12j`, `10gg`, etc. 
+The following table show all the available motions:
 
 | Command | Description       |
 | ------- | ----------------- |
@@ -111,7 +112,8 @@ This plugin adds the basic vim motions:
 | `gk`    | Go `x` lines up   |
 | `gg`    | Go to line        |
 
-As well as some common operations:
+
+Furthermore, the following operations were also added:
 
 | Command | Description   |
 | ------- | ------------- |
@@ -120,5 +122,5 @@ As well as some common operations:
 | `x`     | Cut           |
 | `d`     | Delete motion |
 
-This must be followed by a direction, which can be `j`, `k` or repeating the command key,
+This however must be followed by a direction, which can be `j`, `k` or repeating the command key,
 which will default the direction down, e.g. `2yy` will copy two lines down.
