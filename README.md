@@ -96,7 +96,7 @@ The `show_numbers` variable supports the following values:
 | `none`              | Doesn't show any number |
 
 > [!NOTE]
-> This function overwrites [`Folder:icon`](https://github.com/sxyazi/yazi/blob/e51e8ad789914b2ab4a9485da7aa7fbc7b3bb450/yazi-plugin/preset/components/folder.lua#L17),
+> This functionality overwrites [`Folder:icon`](https://github.com/sxyazi/yazi/blob/e51e8ad789914b2ab4a9485da7aa7fbc7b3bb450/yazi-plugin/preset/components/folder.lua#L17),
 > so if you are already modifying this function you may encouter some issues.
 
 ## Usage
