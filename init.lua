@@ -15,6 +15,7 @@ local DIRECTION_KEYS = {
 
 local SHOW_NUMBERS_ABSOLUTE = 0
 local SHOW_NUMBERS_RELATIVE = 1
+local SHOW_NUMBERS_RELATIVE_ABSOLUTE = 2
 
 -----------------------------------------------
 ----------------- R E N D E R -----------------
@@ -23,7 +24,7 @@ local SHOW_NUMBERS_RELATIVE = 1
 local render_motion_setup = ya.sync(function()
 	ya.render()
 
-	Status.motion = function(self) end
+	Status.motion = function() end
 
 	Status.render = function(self, area)
 		self.area = area
@@ -64,39 +65,82 @@ local render_motion = ya.sync(function(_, motion_num, motion_cmd)
 	end
 end)
 
-local render_numbers = ya.sync(function(_, mode)
+local render_numbers = ya.sync(function(state, mode)
 	ya.render()
 
-	function Folder:icon(file)
-		local folder = Folder:by_kind(Folder.CURRENT)
-		local idx, hovered
-		if folder then
-			for i, f in ipairs(folder.window) do
-				if f:is_hovered() then
-					hovered = i
+	Folder.number = function(_, index, file, hovered)
+		local idx
+		if mode == SHOW_NUMBERS_RELATIVE then
+			idx = math.abs(hovered - index)
+		elseif mode == SHOW_NUMBERS_ABSOLUTE then
+			-- only calculate the absolute index of the first file, then use it with the offset from the relative index
+			if index == 1 then
+				for i, f in ipairs(Folder:by_kind(Folder.CURRENT).files) do
+					if f.url == file.url then
+						state.abs_idx = i
+						break
+					end
 				end
-
-				if f.url == file.url then
-					idx = i
+			end
+			idx = state.abs_idx + index - 1
+		else
+			-- if the hovered file, get absolute index
+			if hovered == index then
+				for i, f in ipairs(Folder:by_kind(Folder.CURRENT).files) do
+					if f.url == file.url then
+						idx = i
+						break
+					end
 				end
+			else
+				idx = math.abs(hovered - index)
 			end
 		end
 
-		local icon = file:icon()
-		if not idx then
-			return icon and ui.Span(" " .. icon.text .. " "):style(icon.style) or ui.Span("")
+		return ui.Span(string.format("%2d ", idx))
+	end
+
+	Current.render = function(self, area)
+		self.area = area
+
+		local files = Folder:by_kind(Folder.CURRENT).window
+		if #files == 0 then
+			return {}
 		end
 
-		local index
-		if mode == SHOW_NUMBERS_ABSOLUTE then
-			index = idx
-		else
-			index = hovered == idx and idx or math.abs(idx - hovered)
+		local hovered_index
+		for i, f in ipairs(files) do
+			if f:is_hovered() then
+				hovered_index = i
+				break
+			end
 		end
 
-		return ui.Line({
-			ui.Span(string.format("%2d ", index)),
-			icon and ui.Span(" " .. icon.text .. " "):style(icon.style) or ui.Span(""),
+		local items, markers = {}, {}
+		for i, f in ipairs(files) do
+			local name = Folder:highlighted_name(f)
+
+			-- Highlight hovered file
+			local item =
+				ui.ListItem(ui.Line({ Folder:number(i, f, hovered_index), Folder:icon(f), table.unpack(name) }))
+			if f:is_hovered() then
+				item = item:style(THEME.manager.hovered)
+			else
+				item = item:style(f:style())
+			end
+			items[#items + 1] = item
+
+			-- Yanked/marked/selected files
+			local marker = Folder:marker(f)
+			if marker ~= 0 then
+				markers[#markers + 1] = { i, marker }
+			end
+		end
+
+		return ya.flat({
+			ui.List(area, items),
+			Folder:linemode(area, files),
+			Folder:markers(area, markers),
 		})
 	end
 end)
@@ -223,10 +267,12 @@ return {
 
 		if not args["show_numbers"] then
 			render_numbers(SHOW_NUMBERS_RELATIVE)
-		elseif args["show_numbers"] == "abs" or args["show_numbers"] == "absolute" then
+		elseif args["show_numbers"] == "absolute" then
 			render_numbers(SHOW_NUMBERS_ABSOLUTE)
-		elseif args["show_numbers"] == "rel" or args["show_numbers"] == "relative" then
+		elseif args["show_numbers"] == "relative" then
 			render_numbers(SHOW_NUMBERS_RELATIVE)
+		elseif args["show_numbers"] == "relative_absolute" then
+			render_numbers(SHOW_NUMBERS_RELATIVE_ABSOLUTE)
 		elseif args["show_numbers"] == "none" then
 			return
 		else
