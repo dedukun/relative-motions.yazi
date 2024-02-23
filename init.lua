@@ -147,6 +147,10 @@ local function get_cmd(first_char)
 	return tonumber(lines), last_key, direction
 end
 
+-----------------------------------------------
+---------- E N T R Y   /   S E T U P ----------
+-----------------------------------------------
+
 return {
 	entry = function(_, args)
 		local initial_value
