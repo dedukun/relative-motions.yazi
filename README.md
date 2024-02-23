@@ -17,6 +17,30 @@ git clone https://github.com/dedukun/relative-motions.yazi.git %AppData%\yazi\co
 
 ## Usage
 
+This plugin adds the basic vim motions:
+
+| Command | Description       |
+| ------- | ----------------- |
+| `j`     | Move `x` down     |
+| `k`     | Move `x` up       |
+| `gj`    | Go `x` lines down |
+| `gk`    | Go `x` lines up   |
+| `gg`    | Go to line        |
+
+As well as some common operations:
+
+| Command | Description   |
+| ------- | ------------- |
+| `v`     | visual select |
+| `y`     | Yank          |
+| `x`     | Cut           |
+| `d`     | Delete motion |
+
+This however must be followed by a direction, which can be `j`, `k` or repeating the key,
+which will default to `j`.
+
+## Configuration
+
 Add this to your `keymap.toml`:
 
 ```toml
@@ -72,7 +96,7 @@ If you want to have numbers showing on the side of the files, add the following 
 require("relative-motions"):setup({show_numbers="relative"})
 ```
 
-The `show_numbers` variable supports the following value:
+The `show_numbers` variable supports the following values:
 
 | Value               | Description             |
 | ------------------- | ----------------------- |
