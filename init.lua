@@ -78,7 +78,7 @@ end)
 local render_numbers = ya.sync(function(state, mode)
 	ya.render()
 
-	Folder.number = function(_, index, file, hovered)
+	File.number = function(_, index, file, hovered)
 		local idx
 		if mode == SHOW_NUMBERS_RELATIVE then
 			idx = math.abs(hovered - index)
@@ -128,20 +128,11 @@ local render_numbers = ya.sync(function(state, mode)
 
 		local items, markers = {}, {}
 		for i, f in ipairs(files) do
-			local name = Folder:highlighted_name(f)
-
-			-- Highlight hovered file
-			local item =
-				ui.ListItem(ui.Line({ Folder:number(i, f, hovered_index), Folder:icon(f), table.unpack(name) }))
-			if f:is_hovered() then
-				item = item:style(THEME.manager.hovered)
-			else
-				item = item:style(f:style())
-			end
-			items[#items + 1] = item
+			items[#items + 1] = ui.ListItem(ui.Line(ya.flat({ File:number(i, f, hovered_index), File:full(f) })))
+				:style(File:style(f))
 
 			-- Yanked/marked/selected files
-			local marker = Folder:marker(f)
+			local marker = File:marker(f)
 			if marker ~= 0 then
 				markers[#markers + 1] = { i, marker }
 			end
