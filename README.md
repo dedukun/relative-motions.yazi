@@ -5,6 +5,8 @@ A [Yazi](https://github.com/sxyazi/yazi) plugin based about vim motions.
 > [!NOTE]
 > The latest main branch of Yazi is required at the moment.
 
+https://github.com/dedukun/relative-motions.yazi/assets/25795432/04fb186a-5efe-442d-8d7b-2dccb6eee408
+
 ## Installation
 
 ```sh
