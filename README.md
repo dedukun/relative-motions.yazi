@@ -83,22 +83,27 @@ desc = "Trigger a new relative motion"
 
 Additionally there are a couple of initial configurations that can be given to the plugin's `setup` function:
 
-| Configuration  | Values                           | Default    | Description                                             |
-| -------------- | -------------------------------- | ---------- | ------------------------------------------------------- |
-| `show_numbers` | `relative`, `absolute` or `none` | `relative` | Shows relative or absolute numbers before the file icon |
-| `show_motion`  | `true` or `false`                | `false`    | Shows current motion in Status bar                      |
+| Configuration  | Values                                                | Default    | Description                                             |
+| -------------- | ----------------------------------------------------- | ---------- | ------------------------------------------------------- |
+| `show_numbers` | `relative`, `absolute`, `relative_absolute` or `none` | `relative` | Shows relative or absolute numbers before the file icon |
+| `show_motion`  | `true` or `false`                                     | `false`    | Shows current motion in Status bar                      |
 
-If you want, for exemple, to enable absolute numbers, as well as the show the motion in the status bar,
+If you want, for exemple, to enable absolute numbers as well as to show the motion in the status bar,
 add the following to `init.lua`:
 
 ```lua
 require("relative-motions"):setup({show_numbers="absolute", show_motion = true})
 ```
 
+> [!WARNING]
+> The `absolute` and `relative_absolute` option for `show_numbers` might make the scrolling feel
+> laggy, if this happens you should use `relative` or `none`.
+
 > [!NOTE]
-> The `show_numbers` functionality overwrites [`Folder:icon`](https://github.com/sxyazi/yazi/blob/e51e8ad789914b2ab4a9485da7aa7fbc7b3bb450/yazi-plugin/preset/components/folder.lua#L17)
-> and `show_motion` adds a new `Status.motions` and modifies `Status.render`,
-> so if you are already modifying using any of this functions you will encounter some issues.
+> The `show_numbers` and `show_motion` functionalities overwrite [`Current:render`](https://github.com/sxyazi/yazi/blob/e51e8ad789914b2ab4a9485da7aa7fbc7b3bb450/yazi-plugin/preset/components/current.lua#L5)
+> and [`Status:render`](https://github.com/sxyazi/yazi/blob/e51e8ad789914b2ab4a9485da7aa7fbc7b3bb450/yazi-plugin/preset/components/status.lua#L111) respectively.
+> If you have custom implementations for any of this functions,
+> you can use the `Folder:number` and `Status:motion` respectively and add it to your custom implementations.
 
 ## Usage
 

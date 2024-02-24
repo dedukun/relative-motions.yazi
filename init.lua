@@ -77,12 +77,12 @@ local render_numbers = ya.sync(function(state, mode)
 			if index == 1 then
 				for i, f in ipairs(Folder:by_kind(Folder.CURRENT).files) do
 					if f.url == file.url then
-						state.abs_idx = i
+						state._absolute_index = i
 						break
 					end
 				end
 			end
-			idx = state.abs_idx + index - 1
+			idx = state._absolute_index + index - 1
 		else
 			-- if the hovered file, get absolute index
 			if hovered == index then
@@ -264,6 +264,9 @@ return {
 		if args["show_motion"] then
 			render_motion_setup()
 		end
+
+		-- initialize state variables
+		state._absolute_index = 0
 
 		if not args["show_numbers"] then
 			render_numbers(SHOW_NUMBERS_RELATIVE)
