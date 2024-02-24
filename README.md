@@ -95,12 +95,8 @@ If you want, for exemple, to enable relative numbers as well as to show the moti
 add the following to `init.lua`:
 
 ```lua
-require("relative-motions"):setup({show_numbers="relative", show_motion = true})
+require("relative-motions"):setup({ show_numbers="relative", show_motion = true })
 ```
-
-> [!WARNING]
-> The `absolute` and `relative_absolute` option for `show_numbers` might make the scrolling feel
-> laggy, if this happens you should use `relative` or `none`.
 
 > [!NOTE]
 > The `show_numbers` and `show_motion` functionalities overwrite [`Current:render`](https://github.com/sxyazi/yazi/blob/e51e8ad789914b2ab4a9485da7aa7fbc7b3bb450/yazi-plugin/preset/components/current.lua#L5)

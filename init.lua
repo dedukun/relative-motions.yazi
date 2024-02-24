@@ -83,16 +83,7 @@ local render_numbers = ya.sync(function(state, mode)
 		if mode == SHOW_NUMBERS_RELATIVE then
 			idx = math.abs(hovered - index)
 		elseif mode == SHOW_NUMBERS_ABSOLUTE then
-			-- only calculate the absolute index of the first file, then use it with the offset from the relative index
-			if index == 1 then
-				for i, f in ipairs(Folder:by_kind(Folder.CURRENT).files) do
-					if f.url == file.url then
-						state._absolute_index = i
-						break
-					end
-				end
-			end
-			idx = state._absolute_index + index - 1
+			idx = file.idx
 		else
 			-- if the hovered file, get absolute index
 			if hovered == index then
@@ -269,7 +260,6 @@ return {
 		end
 
 		-- initialize state variables
-		state._absolute_index = 0
 		state._only_motions = args["only_motions"] or false
 
 		if args["show_motion"] then
