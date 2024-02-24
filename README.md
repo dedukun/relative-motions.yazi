@@ -70,11 +70,11 @@ desc = "Move in relative steps"
 
 </details>
 
-Alternatively you can use a key to trigger a new motion, for that add the following in `keymap.toml`:
+Alternatively you can use a key to trigger a new motion without any initial value, for that add the following in `keymap.toml`:
 
 ```lua
 [[manager.prepend_keymap]]
-on = [ "9" ]
+on = [ "m" ]
 exec = "plugin relative-motions"
 desc = "Trigger a new relative motion"
 ```
