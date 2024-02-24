@@ -24,7 +24,9 @@ local SHOW_NUMBERS_RELATIVE_ABSOLUTE = 2
 local render_motion_setup = ya.sync(function()
 	ya.render()
 
-	Status.motion = function() end
+	Status.motion = function()
+		return ui.Span("")
+	end
 
 	Status.render = function(self, area)
 		self.area = area
