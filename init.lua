@@ -1,9 +1,17 @@
 -- stylua: ignore
-local SUPPORTED_KEYS = {
+local MOTIONS_AND_OP_KEYS = {
 	{ on = "0"}, { on = "1"}, { on = "2"}, { on = "3"}, { on = "4"},
 	{ on = "5"}, { on = "6"}, { on = "7"}, { on = "8"}, { on = "9"},
 	-- commands
 	{ on = "d"},  { on = "g"}, { on = "v"}, { on = "y"}, { on = "x"},
+	-- movement
+	{ on = "j"}, { on = "k"}
+}
+
+-- stylua: ignore
+local MOTION_KEYS = {
+	{ on = "0"}, { on = "1"}, { on = "2"}, { on = "3"}, { on = "4"},
+	{ on = "5"}, { on = "6"}, { on = "7"}, { on = "8"}, { on = "9"},
 	-- movement
 	{ on = "j"}, { on = "k"}
 }
@@ -155,18 +163,18 @@ end
 --------- C O M M A N D   P A R S E R ---------
 -----------------------------------------------
 
-local function get_cmd(first_char)
+local function get_cmd(first_char, keys)
 	local last_key
 	local lines = first_char or ""
 
 	while true do
 		render_motion(tonumber(lines))
-		local key = ya.which({ cands = SUPPORTED_KEYS, silent = true })
+		local key = ya.which({ cands = keys, silent = true })
 		if not key then
 			return nil, nil, nil
 		end
 
-		last_key = SUPPORTED_KEYS[key].on
+		last_key = keys[key].on
 		if not tonumber(last_key) then
 			break
 		end
@@ -198,7 +206,7 @@ end
 -----------------------------------------------
 
 return {
-	entry = function(_, args)
+	entry = function(state, args)
 		local initial_value
 
 		-- this is checking if the argument is a valid number
@@ -209,7 +217,8 @@ return {
 			end
 		end
 
-		local lines, cmd, direction = get_cmd(initial_value)
+		local keys = state._only_motions and MOTIONS_AND_OP_KEYS or MOTION_KEYS
+		local lines, cmd, direction = get_cmd(initial_value, keys)
 		if not lines or not cmd then
 			-- command was cancelled
 			render_clear()
@@ -271,6 +280,7 @@ return {
 
 		-- initialize state variables
 		state._absolute_index = 0
+		state._only_motions = args["only_motions"] or false
 
 		if args["show_numbers"] == "absolute" then
 			render_numbers(SHOW_NUMBERS_ABSOLUTE)
