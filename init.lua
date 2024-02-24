@@ -82,8 +82,7 @@ local render_numbers = ya.sync(function(_, mode)
 			idx = math.abs(hovered - index)
 		elseif mode == SHOW_NUMBERS_ABSOLUTE then
 			idx = file.idx
-		else
-			-- if the hovered file, get absolute index
+		else -- SHOW_NUMBERS_RELATIVE_ABSOLUTE
 			if hovered == index then
 				idx = file.idx
 			else
@@ -91,7 +90,14 @@ local render_numbers = ya.sync(function(_, mode)
 			end
 		end
 
-		return ui.Span(string.format("%2d ", idx))
+		-- emulate vim's hovered offset
+		if idx >= 100 then
+			return ui.Span(string.format("%4d ", idx))
+		elseif hovered == index then
+			return ui.Span(string.format("%3d  ", idx))
+		else
+			return ui.Span(string.format(" %3d ", idx))
+		end
 	end
 
 	Current.render = function(self, area)
