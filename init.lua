@@ -260,7 +260,7 @@ return {
 	end,
 	setup = function(state, args)
 		if not args then
-			render_numbers(SHOW_NUMBERS_RELATIVE)
+			return
 		end
 
 		if args["show_motion"] then
@@ -270,18 +270,12 @@ return {
 		-- initialize state variables
 		state._absolute_index = 0
 
-		if not args["show_numbers"] then
-			render_numbers(SHOW_NUMBERS_RELATIVE)
-		elseif args["show_numbers"] == "absolute" then
+		if args["show_numbers"] == "absolute" then
 			render_numbers(SHOW_NUMBERS_ABSOLUTE)
 		elseif args["show_numbers"] == "relative" then
 			render_numbers(SHOW_NUMBERS_RELATIVE)
 		elseif args["show_numbers"] == "relative_absolute" then
 			render_numbers(SHOW_NUMBERS_RELATIVE_ABSOLUTE)
-		elseif args["show_numbers"] == "none" then
-			return
-		else
-			render_numbers(SHOW_NUMBERS_RELATIVE)
 		end
 	end,
 }

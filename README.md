@@ -83,10 +83,10 @@ desc = "Trigger a new relative motion"
 
 Additionally there are a couple of initial configurations that can be given to the plugin's `setup` function:
 
-| Configuration  | Values                                                | Default    | Description                                             |
-| -------------- | ----------------------------------------------------- | ---------- | ------------------------------------------------------- |
-| `show_numbers` | `relative`, `absolute`, `relative_absolute` or `none` | `relative` | Shows relative or absolute numbers before the file icon |
-| `show_motion`  | `true` or `false`                                     | `false`    | Shows current motion in Status bar                      |
+| Configuration  | Values                                                | Default | Description                                             |
+| -------------- | ----------------------------------------------------- | ------- | ------------------------------------------------------- |
+| `show_numbers` | `relative`, `absolute`, `relative_absolute` or `none` | `none`  | Shows relative or absolute numbers before the file icon |
+| `show_motion`  | `true` or `false`                                     | `false` | Shows current motion in Status bar                      |
 
 If you want, for exemple, to enable absolute numbers as well as to show the motion in the status bar,
 add the following to `init.lua`:
