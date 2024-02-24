@@ -85,12 +85,7 @@ local render_numbers = ya.sync(function(_, mode)
 		else
 			-- if the hovered file, get absolute index
 			if hovered == index then
-				for i, f in ipairs(Folder:by_kind(Folder.CURRENT).files) do
-					if f.url == file.url then
-						idx = i
-						break
-					end
-				end
+				idx = file.idx
 			else
 				idx = math.abs(hovered - index)
 			end
