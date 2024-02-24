@@ -102,8 +102,8 @@ require("relative-motions"):setup({show_numbers="absolute", show_motion = true})
 > [!NOTE]
 > The `show_numbers` and `show_motion` functionalities overwrite [`Current:render`](https://github.com/sxyazi/yazi/blob/e51e8ad789914b2ab4a9485da7aa7fbc7b3bb450/yazi-plugin/preset/components/current.lua#L5)
 > and [`Status:render`](https://github.com/sxyazi/yazi/blob/e51e8ad789914b2ab4a9485da7aa7fbc7b3bb450/yazi-plugin/preset/components/status.lua#L111) respectively.
-> If you have custom implementations for any of this functions,
-> you can use the `Folder:number` and `Status:motion` respectively and add it to your custom implementations.
+> If you have custom implementations for any of this functions
+> you can add the provided `Folder:number` and `Status:motion` to your implementations, just check [here](https://github.com/dedukun/relative-motions.yazi/blob/main/init.lua#L29) how we are doing things.
 
 ## Usage
 
