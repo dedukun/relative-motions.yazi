@@ -266,7 +266,7 @@ return {
 			elseif cmd == "y" then
 				ya.manager_emit("yank", {})
 			elseif cmd == "x" then
-				ya.manager_emit("yank", { "--cut" })
+				ya.manager_emit("yank", { cut = true })
 			end
 		end
 
