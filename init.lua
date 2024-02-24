@@ -163,6 +163,10 @@ end
 --------- C O M M A N D   P A R S E R ---------
 -----------------------------------------------
 
+local get_keys = ya.sync(function(state)
+	return state._only_motions and MOTION_KEYS or MOTIONS_AND_OP_KEYS
+end)
+
 local function get_cmd(first_char, keys)
 	local last_key
 	local lines = first_char or ""
@@ -206,7 +210,7 @@ end
 -----------------------------------------------
 
 return {
-	entry = function(state, args)
+	entry = function(_, args)
 		local initial_value
 
 		-- this is checking if the argument is a valid number
@@ -217,8 +221,7 @@ return {
 			end
 		end
 
-		local keys = state._only_motions and MOTIONS_AND_OP_KEYS or MOTION_KEYS
-		local lines, cmd, direction = get_cmd(initial_value, keys)
+		local lines, cmd, direction = get_cmd(initial_value, get_keys())
 		if not lines or not cmd then
 			-- command was cancelled
 			render_clear()
@@ -274,13 +277,13 @@ return {
 			return
 		end
 
-		if args["show_motion"] then
-			render_motion_setup()
-		end
-
 		-- initialize state variables
 		state._absolute_index = 0
 		state._only_motions = args["only_motions"] or false
+
+		if args["show_motion"] then
+			render_motion_setup()
+		end
 
 		if args["show_numbers"] == "absolute" then
 			render_numbers(SHOW_NUMBERS_ABSOLUTE)
