@@ -72,7 +72,7 @@ desc = "Move in relative steps"
 
 Alternatively you can use a key to trigger a new motion without any initial value, for that add the following in `keymap.toml`:
 
-```lua
+```toml
 [[manager.prepend_keymap]]
 on = [ "m" ]
 exec = "plugin relative-motions"
