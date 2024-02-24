@@ -242,8 +242,10 @@ return {
 			-- invert direction when user specifies it
 			if direction == "k" then
 				ya.manager_emit("arrow", { -lines })
-			else
+			elseif direction == "j" then
 				ya.manager_emit("arrow", { lines })
+			else
+				ya.manager_emit("arrow", { lines - 1 })
 			end
 			ya.manager_emit("escape", {})
 

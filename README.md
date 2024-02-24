@@ -128,4 +128,4 @@ Furthermore, the following operations were also added:
 | `d`     | Delete motion |
 
 This however must be followed by a direction, which can be `j`, `k` or repeating the command key,
-which will default the direction down, e.g. `2yy` will copy two lines down.
+which will operate from the cursor down, e.g. `2yy` will copy two files.
