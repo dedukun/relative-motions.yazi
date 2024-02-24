@@ -5,6 +5,8 @@ A [Yazi](https://github.com/sxyazi/yazi) plugin based about vim motions.
 > [!NOTE]
 > The latest main branch of Yazi is required at the moment.
 
+https://github.com/dedukun/relative-motions.yazi/assets/25795432/04fb186a-5efe-442d-8d7b-2dccb6eee408
+
 ## Installation
 
 ```sh
@@ -89,11 +91,11 @@ Additionally there are a couple of initial configurations that can be given to t
 | `show_motion`  | `true` or `false`                                     | `false` | Shows current motion in Status bar                                                                                                 |
 | `only_motions` | `true` or `false`                                     | `false` | If true, only the motion movements will be enabled, i.e., the commands for delete, cut, yank and visual selection will be disabled |
 
-If you want, for exemple, to enable absolute numbers as well as to show the motion in the status bar,
+If you want, for exemple, to enable relative numbers as well as to show the motion in the status bar,
 add the following to `init.lua`:
 
 ```lua
-require("relative-motions"):setup({show_numbers="absolute", show_motion = true})
+require("relative-motions"):setup({show_numbers="relative", show_motion = true})
 ```
 
 > [!WARNING]
@@ -104,7 +106,7 @@ require("relative-motions"):setup({show_numbers="absolute", show_motion = true})
 > The `show_numbers` and `show_motion` functionalities overwrite [`Current:render`](https://github.com/sxyazi/yazi/blob/e51e8ad789914b2ab4a9485da7aa7fbc7b3bb450/yazi-plugin/preset/components/current.lua#L5)
 > and [`Status:render`](https://github.com/sxyazi/yazi/blob/e51e8ad789914b2ab4a9485da7aa7fbc7b3bb450/yazi-plugin/preset/components/status.lua#L111) respectively.
 > If you have custom implementations for any of this functions
-> you can add the provided `File:number` and `Status:motion` to your implementations, just check [here](https://github.com/dedukun/relative-motions.yazi/blob/main/init.lua#L31) how we are doing things.
+> you can add the provided `File:number` and `Status:motion` to your implementations, just check [here](https://github.com/dedukun/relative-motions.yazi/blob/main/init.lua#L39) how we are doing things.
 
 ## Usage
 
