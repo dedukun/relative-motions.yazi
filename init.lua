@@ -3,9 +3,9 @@ local MOTIONS_AND_OP_KEYS = {
 	{ on = "0"}, { on = "1"}, { on = "2"}, { on = "3"}, { on = "4"},
 	{ on = "5"}, { on = "6"}, { on = "7"}, { on = "8"}, { on = "9"},
 	-- commands
-	{ on = "d"},  { on = "g"}, { on = "v"}, { on = "y"}, { on = "x"},
+	{ on = "d"}, { on = "v"}, { on = "y"}, { on = "x"},
 	-- movement
-	{ on = "j"}, { on = "k"}
+	{ on = "g"}, { on = "j"}, { on = "k"}
 }
 
 -- stylua: ignore
@@ -13,7 +13,7 @@ local MOTION_KEYS = {
 	{ on = "0"}, { on = "1"}, { on = "2"}, { on = "3"}, { on = "4"},
 	{ on = "5"}, { on = "6"}, { on = "7"}, { on = "8"}, { on = "9"},
 	-- movement
-	{ on = "j"}, { on = "k"}
+	{ on = "g"}, { on = "j"}, { on = "k"}
 }
 
 -- stylua: ignore
