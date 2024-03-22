@@ -91,10 +91,11 @@ Additionally there are a couple of initial configurations that can be given to t
 | `show_motion`  | `true` or `false`                                     | `false` | Shows current motion in Status bar                                                                                                 |
 | `only_motions` | `true` or `false`                                     | `false` | If true, only the motion movements will be enabled, i.e., the commands for delete, cut, yank and visual selection will be disabled |
 
-If you want, for exemple, to enable relative numbers as well as to show the motion in the status bar,
-add the following to `init.lua`:
+If you want, for example, to enable relative numbers as well as to show the motion in the status bar,
+add the following to Yazi's `init.lua`, i.e. `~/.config/yazi/init.lua`:
 
 ```lua
+-- ~/.config/yazi/init.lua
 require("relative-motions"):setup({ show_numbers="relative", show_motion = true })
 ```
 
