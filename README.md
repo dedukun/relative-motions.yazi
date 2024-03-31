@@ -26,47 +26,47 @@ If you want to use the numbers directly to start a motion add this to your `keym
 ```toml
 [[manager.prepend_keymap]]
 on = [ "1" ]
-exec = "plugin relative-motions --args=1"
+run = "plugin relative-motions --args=1"
 desc = "Move in relative steps"
 
 [[manager.prepend_keymap]]
 on = [ "2" ]
-exec = "plugin relative-motions --args=2"
+run = "plugin relative-motions --args=2"
 desc = "Move in relative steps"
 
 [[manager.prepend_keymap]]
 on = [ "3" ]
-exec = "plugin relative-motions --args=3"
+run = "plugin relative-motions --args=3"
 desc = "Move in relative steps"
 
 [[manager.prepend_keymap]]
 on = [ "4" ]
-exec = "plugin relative-motions --args=4"
+run = "plugin relative-motions --args=4"
 desc = "Move in relative steps"
 
 [[manager.prepend_keymap]]
 on = [ "5" ]
-exec = "plugin relative-motions --args=5"
+run = "plugin relative-motions --args=5"
 desc = "Move in relative steps"
 
 [[manager.prepend_keymap]]
 on = [ "6" ]
-exec = "plugin relative-motions --args=6"
+run = "plugin relative-motions --args=6"
 desc = "Move in relative steps"
 
 [[manager.prepend_keymap]]
 on = [ "7" ]
-exec = "plugin relative-motions --args=7"
+run = "plugin relative-motions --args=7"
 desc = "Move in relative steps"
 
 [[manager.prepend_keymap]]
 on = [ "8" ]
-exec = "plugin relative-motions --args=8"
+run = "plugin relative-motions --args=8"
 desc = "Move in relative steps"
 
 [[manager.prepend_keymap]]
 on = [ "9" ]
-exec = "plugin relative-motions --args=9"
+run = "plugin relative-motions --args=9"
 desc = "Move in relative steps"
 ```
 
@@ -77,7 +77,7 @@ Alternatively you can use a key to trigger a new motion without any initial valu
 ```toml
 [[manager.prepend_keymap]]
 on = [ "m" ]
-exec = "plugin relative-motions"
+run = "plugin relative-motions"
 desc = "Trigger a new relative motion"
 ```
 
