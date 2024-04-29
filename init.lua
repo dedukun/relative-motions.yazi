@@ -105,7 +105,7 @@ local render_numbers = ya.sync(function(_, mode)
 
 		local files = Folder:by_kind(Folder.CURRENT).window
 		if #files == 0 then
-			return {}
+			return self:empty(area)
 		end
 
 		local hovered_index
