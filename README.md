@@ -2,12 +2,16 @@
 
 A [Yazi](https://github.com/sxyazi/yazi) plugin based about vim motions.
 
-> [!NOTE]
-> The latest main branch of Yazi is required at the moment.
-
 https://github.com/dedukun/relative-motions.yazi/assets/25795432/04fb186a-5efe-442d-8d7b-2dccb6eee408
 
+## Requirements
+
+- [Yazi](https://github.com/sxyazi/yazi) v0.2.4+
+
 ## Installation
+
+<details>
+<summary>v0.2.5 and before (manual installation)</summary>
 
 ```sh
 # Linux/macOS
@@ -16,6 +20,24 @@ git clone https://github.com/dedukun/relative-motions.yazi.git ~/.config/yazi/pl
 # Windows
 git clone https://github.com/dedukun/relative-motions.yazi.git %AppData%\yazi\config\plugins\relative-motions.yazi
 ```
+
+</details>
+
+<details>
+<summary>Latest commit in Yazi (Package Manager)</summary>
+
+```sh
+# Add the plugin
+ya pack -a dedukun/relative-motions
+
+# Install plugin
+ya pack -i
+
+# Update plugin
+ya pack -u
+```
+
+</details>
 
 ## Configuration
 
