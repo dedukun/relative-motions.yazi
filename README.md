@@ -11,7 +11,7 @@ https://github.com/dedukun/relative-motions.yazi/assets/25795432/04fb186a-5efe-4
 ## Installation
 
 <details>
-<summary>v0.2.5 and before (manual installation)</summary>
+<summary>Yazi v0.2.5 and before (manual installation)</summary>
 
 ```sh
 # Linux/macOS
@@ -24,7 +24,7 @@ git clone https://github.com/dedukun/relative-motions.yazi.git %AppData%\yazi\co
 </details>
 
 <details>
-<summary>Latest commit in Yazi (Package Manager)</summary>
+<summary>Latest commit in Yazi (package manager)</summary>
 
 ```sh
 # Add the plugin
