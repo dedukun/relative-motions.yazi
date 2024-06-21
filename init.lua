@@ -4,6 +4,9 @@ local MOTIONS_AND_OP_KEYS = {
 	{ on = "5" }, { on = "6" }, { on = "7" }, { on = "8" }, { on = "9" },
 	-- commands
 	{ on = "d" }, { on = "v" }, { on = "y" }, { on = "x" },
+	-- tab commands
+	{ on = "t" }, { on = "L" }, { on = "H" }, { on = "w" },
+	{ on = "W" }, { on = "<" }, { on = ">" }, { on = "~" },
 	-- movement
 	{ on = "g" }, { on = "j" }, { on = "k" }
 }
@@ -18,7 +21,9 @@ local MOTION_KEYS = {
 
 -- stylua: ignore
 local DIRECTION_KEYS = {
-	{ on = "j" }, { on = "k" }
+	{ on = "j" }, { on = "k" },
+	-- tab movement
+	{ on = "t" }
 }
 
 local SHOW_NUMBERS_ABSOLUTE = 0
@@ -182,6 +187,16 @@ local function get_cmd(first_char, keys)
 	return tonumber(lines), last_key, direction
 end
 
+local function is_tab_command(command)
+	local tab_commands = { "t", "L", "H", "w", "W", "<", ">", "~" }
+	for _, cmd in ipairs(tab_commands) do
+		if command == cmd then
+			return true
+		end
+	end
+	return false
+end
+
 -----------------------------------------------
 ---------- E N T R Y   /   S E T U P ----------
 -----------------------------------------------
@@ -215,6 +230,10 @@ return {
 				cmd = "j"
 			elseif direction == "k" then
 				cmd = "k"
+			elseif direction == "t" then
+				ya.manager_emit("tab_switch", { lines - 1 })
+				render_clear()
+				return
 			else
 				-- no valid direction
 				render_clear()
@@ -226,6 +245,20 @@ return {
 			ya.manager_emit("arrow", { lines })
 		elseif cmd == "k" then
 			ya.manager_emit("arrow", { -lines })
+		elseif is_tab_command(cmd) then
+			if cmd == "t" then
+				for _ = 1, lines do
+					ya.manager_emit("tab_create", {})
+				end
+			elseif cmd == "H" then
+				ya.err("H LEFT RELATIVE: " .. -lines)
+				ya.manager_emit("tab_switch", { -lines, "--relative" })
+			elseif cmd == "L" then
+				ya.err("L RIGHT RELATIVE: " .. lines)
+				ya.manager_emit("tab_switch", { lines, "--relative" })
+			elseif cmd == "w" then
+				ya.manager_emit("tab_close", { lines - 1 })
+			end
 		else
 			ya.manager_emit("visual_mode", {})
 			-- invert direction when user specifies it
