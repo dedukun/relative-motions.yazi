@@ -197,6 +197,10 @@ local function is_tab_command(command)
 	return false
 end
 
+local get_max_tab = ya.sync(function(_) return #cx.tabs end)
+
+local get_active_tab = ya.sync(function(_) return cx.tabs.idx end)
+
 -----------------------------------------------
 ---------- E N T R Y   /   S E T U P ----------
 -----------------------------------------------
@@ -258,6 +262,18 @@ return {
 				ya.manager_emit("tab_switch", { lines, "--relative" })
 			elseif cmd == "w" then
 				ya.manager_emit("tab_close", { lines - 1 })
+			elseif cmd == "W" then
+				local max_tab = get_max_tab()
+				for _ = lines, max_tab do
+					ya.manager_emit("tab_close", { lines - 1 })
+				end
+			elseif cmd == "<" then
+				ya.manager_emit("tab_swap", { -lines })
+			elseif cmd == ">" then
+				ya.manager_emit("tab_swap", { lines })
+			elseif cmd == "~" then
+				local jump = lines - get_active_tab()
+				ya.manager_emit("tab_swap", { jump })
 			end
 		else
 			ya.manager_emit("visual_mode", {})
