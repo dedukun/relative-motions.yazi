@@ -5,7 +5,7 @@ local MOTIONS_AND_OP_KEYS = {
 	-- commands
 	{ on = "d" }, { on = "v" }, { on = "y" }, { on = "x" },
 	-- movement
-	{ on = "g" }, { on = "j" }, { on = "k" }
+	{ on = "g" }, { on = "j" }, { on = "k" }, { on = "<Down>" }, { on = "<Up>" }
 }
 
 -- stylua: ignore
@@ -18,7 +18,8 @@ local MOTION_KEYS = {
 
 -- stylua: ignore
 local DIRECTION_KEYS = {
-	{ on = "j" }, { on = "k" }
+	{ on = "j" }, { on = "k" },
+	{ on = "<Down>" }, { on = "<Up>" }
 }
 
 local SHOW_NUMBERS_ABSOLUTE = 0
@@ -157,6 +158,11 @@ local function get_cmd(first_char, keys)
 
 		last_key = keys[key].on
 		if not tonumber(last_key) then
+			if last_key == "<Down>" then
+				last_key = "j"
+			elseif last_key == "<Up>" then
+				last_key = "k"
+			end
 			break
 		end
 
@@ -211,9 +217,9 @@ return {
 				ya.manager_emit("arrow", { lines - 1 })
 				render_clear()
 				return
-			elseif direction == "j" then
+			elseif direction == "j" or direction == "<Down>" then
 				cmd = "j"
-			elseif direction == "k" then
+			elseif direction == "k" or direction == "<Up>" then
 				cmd = "k"
 			else
 				-- no valid direction
@@ -229,9 +235,9 @@ return {
 		else
 			ya.manager_emit("visual_mode", {})
 			-- invert direction when user specifies it
-			if direction == "k" then
+			if direction == "k" or direction == "<Up>" then
 				ya.manager_emit("arrow", { -lines })
-			elseif direction == "j" then
+			elseif direction == "j" or direction == "<Down>" then
 				ya.manager_emit("arrow", { lines })
 			else
 				ya.manager_emit("arrow", { lines - 1 })
