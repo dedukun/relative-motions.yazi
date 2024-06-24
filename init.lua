@@ -266,15 +266,9 @@ return {
 					ya.manager_emit("tab_create", {})
 				end
 			elseif cmd == "H" then
-				-- TODO: couldn't get relative swtich to work correctly
-				-- ya.manager_emit("tab_switch", { -lines, "--relative" })
-				local tab = get_active_tab() - lines
-				ya.manager_emit("tab_switch", { tab - 1 })
+				ya.manager_emit("tab_switch", { -lines, relative = true })
 			elseif cmd == "L" then
-				-- TODO: couldn't get relative swtich to work correctly
-				-- ya.manager_emit("tab_switch", { lines, "--relative" })
-				local tab = get_active_tab() + lines
-				ya.manager_emit("tab_switch", { tab - 1 })
+				ya.manager_emit("tab_switch", { lines, relative = true })
 			elseif cmd == "w" then
 				ya.manager_emit("tab_close", { lines - 1 })
 			elseif cmd == "W" then
