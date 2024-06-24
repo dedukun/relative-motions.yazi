@@ -145,6 +145,15 @@ local function render_clear() render_motion() end
 
 local get_keys = ya.sync(function(state) return state._only_motions and MOTION_KEYS or MOTIONS_AND_OP_KEYS end)
 
+local function normal_direction(dir)
+	if dir == "<Down>" then
+		return "j"
+	elseif dir == "<Up>" then
+		return "k"
+	end
+	return dir
+end
+
 local function get_cmd(first_char, keys)
 	local last_key
 	local lines = first_char or ""
@@ -158,11 +167,7 @@ local function get_cmd(first_char, keys)
 
 		last_key = keys[key].on
 		if not tonumber(last_key) then
-			if last_key == "<Down>" then
-				last_key = "j"
-			elseif last_key == "<Up>" then
-				last_key = "k"
-			end
+			last_key = normal_direction(last_key)
 			break
 		end
 
@@ -183,6 +188,7 @@ local function get_cmd(first_char, keys)
 		end
 
 		direction = DIRECTION_KEYS[direction_key].on
+		direction = normal_direction(direction)
 	end
 
 	return tonumber(lines), last_key, direction
@@ -217,9 +223,9 @@ return {
 				ya.manager_emit("arrow", { lines - 1 })
 				render_clear()
 				return
-			elseif direction == "j" or direction == "<Down>" then
+			elseif direction == "j" then
 				cmd = "j"
-			elseif direction == "k" or direction == "<Up>" then
+			elseif direction == "k" then
 				cmd = "k"
 			else
 				-- no valid direction
@@ -235,9 +241,9 @@ return {
 		else
 			ya.manager_emit("visual_mode", {})
 			-- invert direction when user specifies it
-			if direction == "k" or direction == "<Up>" then
+			if direction == "k" then
 				ya.manager_emit("arrow", { -lines })
-			elseif direction == "j" or direction == "<Down>" then
+			elseif direction == "j" then
 				ya.manager_emit("arrow", { lines })
 			else
 				ya.manager_emit("arrow", { lines - 1 })

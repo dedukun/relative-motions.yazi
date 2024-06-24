@@ -132,13 +132,13 @@ require("relative-motions"):setup({ show_numbers="relative", show_motion = true 
 This plugin adds the some basic vim motions like `3k`, `12j`, `10gg`, etc.
 The following table show all the available motions:
 
-| Command | Description         |
-| ------- | ------------------- |
-| `j`     | Move `n` lines down |
-| `k`     | Move `n` lines up   |
-| `gj`    | Go `n` lines down   |
-| `gk`    | Go `n` lines up     |
-| `gg`    | Go to line          |
+| Command        | Description         |
+| -------------- | ------------------- |
+| `j`/`<Down>`   | Move `n` lines down |
+| `k`/`<Up>`     | Move `n` lines up   |
+| `gj`/`g<Down>` | Go `n` lines down   |
+| `gk`/`g<Up>`   | Go `n` lines up     |
+| `gg`           | Go to line          |
 
 Furthermore, the following operations were also added:
 
@@ -149,5 +149,5 @@ Furthermore, the following operations were also added:
 | `x`     | Cut           |
 | `d`     | Delete motion |
 
-This however must be followed by a direction, which can be `j`, `k` or repeating the command key,
+This however must be followed by a direction, which can be `j`/`<Down>`, `k`/`<Up>` or repeating the command key,
 which will operate from the cursor down, e.g. `2yy` will copy two files.
