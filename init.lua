@@ -208,8 +208,6 @@ local function is_tab_command(command)
 	return false
 end
 
-local get_max_tab = ya.sync(function(_) return #cx.tabs end)
-
 local get_active_tab = ya.sync(function(_) return cx.tabs.idx end)
 
 -----------------------------------------------
@@ -272,10 +270,12 @@ return {
 			elseif cmd == "w" then
 				ya.manager_emit("tab_close", { lines - 1 })
 			elseif cmd == "W" then
-				local max_tab = get_max_tab()
-				for _ = lines, max_tab do
-					ya.manager_emit("tab_close", { lines - 1 })
+				local curr_tab = get_active_tab()
+				local del_tab = curr_tab + lines - 1
+				for _ = curr_tab, del_tab do
+					ya.manager_emit("tab_close", { curr_tab - 1 })
 				end
+				ya.manager_emit("tab_switch", { curr_tab - 1 })
 			elseif cmd == "<" then
 				ya.manager_emit("tab_swap", { -lines })
 			elseif cmd == ">" then
