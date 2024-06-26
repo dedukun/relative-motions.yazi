@@ -151,3 +151,17 @@ Furthermore, the following operations were also added:
 
 This however must be followed by a direction, which can be `j`/`<Down>`, `k`/`<Up>` or repeating the command key,
 which will operate from the cursor down, e.g. `2yy` will copy two files.
+
+Finally, we also support some tab operations:
+
+| Command | Description                          |
+| ------- | ------------------------------------ |
+| `t`     | create `n` tabs                      |
+| `H`     | Move `n` tabs left                   |
+| `L`     | Move `n` tabs right                  |
+| `gt`    | Go to the `n` tab                    |
+| `w`     | Close tab `n`                        |
+| `W`     | Close `n` tabs right                 |
+| `<`     | Swap current tab with `n` tabs left  |
+| `>`     | Swap current tab with `n` tabs right |
+| `~`     | Swap current tab with tab `n`        |
