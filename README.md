@@ -15,10 +15,10 @@ https://github.com/dedukun/relative-motions.yazi/assets/25795432/04fb186a-5efe-4
 
 ```sh
 # Linux/macOS
-git clone https://github.com/dedukun/relative-motions.yazi.git ~/.config/yazi/plugins/relative-motions.yazi
+git clone -b 0.2.5 https://github.com/dedukun/relative-motions.yazi.git ~/.config/yazi/plugins/relative-motions.yazi
 
 # Windows
-git clone https://github.com/dedukun/relative-motions.yazi.git %AppData%\yazi\config\plugins\relative-motions.yazi
+git clone -b 0.2.5 https://github.com/dedukun/relative-motions.yazi.git %AppData%\yazi\config\plugins\relative-motions.yazi
 ```
 
 </details>
@@ -122,10 +122,10 @@ require("relative-motions"):setup({ show_numbers="relative", show_motion = true 
 ```
 
 > [!NOTE]
-> The `show_numbers` and `show_motion` functionalities overwrite [`Current:render`](https://github.com/sxyazi/yazi/blob/e51e8ad789914b2ab4a9485da7aa7fbc7b3bb450/yazi-plugin/preset/components/current.lua#L5)
-> and [`Status:render`](https://github.com/sxyazi/yazi/blob/e51e8ad789914b2ab4a9485da7aa7fbc7b3bb450/yazi-plugin/preset/components/status.lua#L111) respectively.
+> The `show_numbers` and `show_motion` functionalities overwrite [`Current:render`](https://github.com/sxyazi/yazi/blob/ec33085f672e52adb934503d78703b8dd70621a8/yazi-plugin/preset/components/current.lua#L26)
+> and [`Status:children_render`](https://github.com/sxyazi/yazi/blob/ec33085f672e52adb934503d78703b8dd70621a8/yazi-plugin/preset/components/status.lua#L153) respectively.
 > If you have custom implementations for any of this functions
-> you can add the provided `File:number` and `Status:motion` to your implementations, just check [here](https://github.com/dedukun/relative-motions.yazi/blob/main/init.lua#L39) how we are doing things.
+> you can add the provided `Entity:number` and `Status:motion` to your implementations, just check [here](https://github.com/dedukun/relative-motions.yazi/blob/main/init.lua#L39) how we are doing things.
 
 ## Usage
 
