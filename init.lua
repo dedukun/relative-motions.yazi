@@ -121,15 +121,18 @@ local render_numbers = ya.sync(function(_, mode)
 			end
 		end
 
-		local items = {}
+		local entities, linemodes = {}, {}
 		for i, f in ipairs(files) do
-			items[#items + 1] = ui.ListItem(ui.Line { Entity:number(i, f, hovered_index), Entity:render(f) })
-				:style(Entity:style(f))
+			linemodes[#linemodes + 1] = Linemode:new(f):render()
+
+			local entity = Entity:new(f)
+			entities[#entities + 1] = ui.ListItem(ui.Line { Entity:number(i, f, hovered_index), entity:render() })
+				:style(entity:style())
 		end
 
 		return {
-			ui.List(self._area, items),
-			ui.Paragraph(self._area, Linemode:render(files)):align(ui.Paragraph.RIGHT),
+			ui.List(self._area, entities),
+			ui.Paragraph(self._area, linemodes):align(ui.Paragraph.RIGHT),
 		}
 	end
 end)
