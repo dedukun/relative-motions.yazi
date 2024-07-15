@@ -123,9 +123,9 @@ require("relative-motions"):setup({ show_numbers="relative", show_motion = true 
 
 > [!NOTE]
 > The `show_numbers` and `show_motion` functionalities overwrite [`Current:render`](https://github.com/sxyazi/yazi/blob/ec33085f672e52adb934503d78703b8dd70621a8/yazi-plugin/preset/components/current.lua#L26)
-> and [`Status:children_render`](https://github.com/sxyazi/yazi/blob/ec33085f672e52adb934503d78703b8dd70621a8/yazi-plugin/preset/components/status.lua#L153) respectively.
+> and [`Status:children_render`](https://github.com/sxyazi/yazi/blob/ec33085f672e52adb934503d78703b8dd70621a8/yazi-plugin/preset/components/status.lua#L173) respectively.
 > If you have custom implementations for any of this functions
-> you can add the provided `Entity:number` and `Status:motion` to your implementations, just check [here](https://github.com/dedukun/relative-motions.yazi/blob/main/init.lua#L39) how we are doing things.
+> you can add the provided `Entity:number` and `Status:motion` to your implementations, just check [here](https://github.com/dedukun/relative-motions.yazi/blob/main/init.lua#L126) how we are doing things.
 
 ## Usage
 
