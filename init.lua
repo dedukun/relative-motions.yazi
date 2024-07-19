@@ -44,8 +44,8 @@ local render_motion_setup = ya.sync(function(_)
 		if side == self.RIGHT then
 			lines[1] = self:motion(self)
 		end
-		for _, child in ipairs(side == self.RIGHT and self._right or self._left) do
-			lines[#lines + 1] = child[1](self)
+		for _, c in ipairs(side == self.RIGHT and self._right or self._left) do
+			lines[#lines + 1] = (type(c[1]) == "string" and self[c[1]] or c[1])(self)
 		end
 		return ui.Line(lines)
 	end
