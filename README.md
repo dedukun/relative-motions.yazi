@@ -6,38 +6,13 @@ https://github.com/dedukun/relative-motions.yazi/assets/25795432/04fb186a-5efe-4
 
 ## Requirements
 
-- [Yazi](https://github.com/sxyazi/yazi) v0.2.4+
+- [Yazi](https://github.com/sxyazi/yazi) v0.3.0+
 
 ## Installation
 
-<details>
-<summary>Yazi v0.2.5 and before (manual installation)</summary>
-
 ```sh
-# Linux/macOS
-git clone -b 0.2.5 https://github.com/dedukun/relative-motions.yazi.git ~/.config/yazi/plugins/relative-motions.yazi
-
-# Windows
-git clone -b 0.2.5 https://github.com/dedukun/relative-motions.yazi.git %AppData%\yazi\config\plugins\relative-motions.yazi
-```
-
-</details>
-
-<details>
-<summary>Latest commit in Yazi (package manager)</summary>
-
-```sh
-# Add the plugin
 ya pack -a dedukun/relative-motions
-
-# Install plugin
-ya pack -i
-
-# Update plugin
-ya pack -u
 ```
-
-</details>
 
 ## Configuration
 
