@@ -20,10 +20,10 @@ If you are using <= v0.3.3
 
 ```sh
 # Linux/macOS
-git clone --branch 0.3.3 https://github.com/ndtoan96/ouch.yazi.git ~/.config/yazi/plugins/relative-motions.yazi
+git clone --branch 0.3.3 https://github.com/dedukun/relative-motions.yazi.git ~/.config/yazi/plugins/relative-motions.yazi
 
 # Windows
-git clone --branch 0.3.3 https://github.com/ndtoan96/ouch.yazi.git %AppData%\yazi\config\plugins\relative-motions.yazi
+git clone --branch 0.3.3 https://github.com/dedukun/relative-motions.yazi.git %AppData%\yazi\config\plugins\relative-motions.yazi
 ```
 
 ## Configuration
