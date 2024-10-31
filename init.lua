@@ -39,7 +39,7 @@ local render_motion_setup = ya.sync(function(_)
 
 	Status.motion = function() return ui.Span("") end
 
-	Status.children_render = function(self, side)
+	Status.children_redraw = function(self, side)
 		local lines = {}
 		if side == self.RIGHT then
 			lines[1] = self:motion(self)
@@ -107,7 +107,7 @@ local render_numbers = ya.sync(function(_, mode)
 		end
 	end
 
-	Current.render = function(self)
+	Current.redraw = function(self)
 		local files = self._folder.window
 		if #files == 0 then
 			return self:empty()
@@ -123,10 +123,10 @@ local render_numbers = ya.sync(function(_, mode)
 
 		local entities, linemodes = {}, {}
 		for i, f in ipairs(files) do
-			linemodes[#linemodes + 1] = Linemode:new(f):render()
+			linemodes[#linemodes + 1] = Linemode:new(f):redraw()
 
 			local entity = Entity:new(f)
-			entities[#entities + 1] = ui.Line({ Entity:number(i, f, hovered_index), entity:render() }):style(entity:style())
+			entities[#entities + 1] = ui.Line({ Entity:number(i, f, hovered_index), entity:redraw() }):style(entity:style())
 		end
 
 		return {
