@@ -11,7 +11,11 @@ https://github.com/dedukun/relative-motions.yazi/assets/25795432/04fb186a-5efe-4
 ## Installation
 
 ```sh
-ya pack -a dedukun/relative-motions
+# Linux/macOS
+git clone --branch 0.3.3 https://github.com/dedukun/relative-motions.yazi.git ~/.config/yazi/plugins/relative-motions.yazi
+
+# Windows
+git clone --branch 0.3.3 https://github.com/dedukun/relative-motions.yazi.git %AppData%\yazi\config\plugins\relative-motions.yazi
 ```
 
 ## Configuration
