@@ -155,7 +155,7 @@ end
 
 local function get_cmd(first_char, keys)
 	local last_key
-	local lines = first_char or ""
+	local lines = first_char ~= "nil" and first_char or ""
 
 	while true do
 		render_motion(tonumber(lines))
@@ -216,9 +216,6 @@ return {
 		-- this is checking if the argument is a valid number
 		if args then
 			initial_value = tostring(tonumber(args[1]))
-			if initial_value == "nil" then
-				return
-			end
 		end
 
 		local lines, cmd, direction = get_cmd(initial_value, get_keys())
