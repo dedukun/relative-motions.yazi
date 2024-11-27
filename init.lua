@@ -214,7 +214,7 @@ return {
 		local initial_value
 
 		-- this is checking if the argument is a valid number
-		if args then
+		if #args > 0 then
 			initial_value = tostring(tonumber(args[1]))
 			if initial_value == "nil" then
 				return
