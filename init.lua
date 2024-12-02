@@ -51,7 +51,7 @@ local render_motion_setup = ya.sync(function(_)
 	end
 
 	-- TODO: check why it doesn't work line this
-	-- Status:children_add(Status.motion, 100, Status.RIGHT)
+	-- Status:children_add(function() return ui.Span("") end, 1000, Status.RIGHT)
 end)
 
 local render_motion = ya.sync(function(_, motion_num, motion_cmd)
@@ -66,15 +66,15 @@ local render_motion = ya.sync(function(_, motion_num, motion_cmd)
 
 		local motion_span
 		if not motion_cmd then
-			motion_span = ui.Span(string.format("  %3d ", motion_num)):style(style)
+			motion_span = ui.Span(string.format("  %3d ", motion_num))
 		else
-			motion_span = ui.Span(string.format(" %3d%s ", motion_num, motion_cmd)):style(style)
+			motion_span = ui.Span(string.format(" %3d%s ", motion_num, motion_cmd))
 		end
 
 		return ui.Line {
-			ui.Span(THEME.status.separator_open):fg(style.bg),
-			motion_span,
-			ui.Span(THEME.status.separator_close):fg(style.bg),
+			ui.Span(THEME.status.separator_open):fg(style.main.bg),
+			motion_span:style(style.main),
+			ui.Span(THEME.status.separator_close):fg(style.main.bg),
 			ui.Span(" "),
 		}
 	end
