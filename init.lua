@@ -8,7 +8,7 @@ local MOTIONS_AND_OP_KEYS = {
 	{ on = "t" }, { on = "L" }, { on = "H" }, { on = "w" },
 	{ on = "W" }, { on = "<" }, { on = ">" }, { on = "~" },
 	-- movement
-	{ on = "g" }, { on = "j" }, { on = "k" }, { on = "<Down>" }, { on = "<Up>" }
+	{ on = "g" }, { on = "j" }, { on = "k" }, { on = "h" }, { on = "<Down>" }, { on = "<Up>" }, { on = "<Left>" }
 }
 
 -- stylua: ignore
@@ -16,7 +16,7 @@ local MOTION_KEYS = {
 	{ on = "0" }, { on = "1" }, { on = "2" }, { on = "3" }, { on = "4" },
 	{ on = "5" }, { on = "6" }, { on = "7" }, { on = "8" }, { on = "9" },
 	-- movement
-	{ on = "g" }, { on = "j" }, { on = "k" }
+	{ on = "g" }, { on = "j" }, { on = "k" }, { on = "h" }, { on = "<Down>" }, { on = "<Up>" }, { on = "<Left>" }
 }
 
 -- stylua: ignore
@@ -149,6 +149,8 @@ local function normal_direction(dir)
 		return "j"
 	elseif dir == "<Up>" then
 		return "k"
+	elseif dir == "<Left>" then
+		return "h"
 	end
 	return dir
 end
@@ -254,6 +256,10 @@ return {
 			ya.manager_emit("arrow", { lines })
 		elseif cmd == "k" then
 			ya.manager_emit("arrow", { -lines })
+		elseif cmd == "h" then
+			for _ = 1, lines do
+				ya.manager_emit("leave", {})
+			end
 		elseif is_tab_command(cmd) then
 			if cmd == "t" then
 				for _ = 1, lines do
