@@ -124,6 +124,7 @@ The following table show all the available motions:
 | `j`/`<Down>`   | Move `n` lines down   |
 | `k`/`<Up>`     | Move `n` lines up     |
 | `h`/`<Left>`   | Move `n` folders back |
+| `l`/`<Right>`  | Enter `n` folders     |
 | `gj`/`g<Down>` | Go `n` lines down     |
 | `gk`/`g<Up>`   | Go `n` lines up       |
 | `gg`           | Go to line            |
