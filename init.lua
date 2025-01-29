@@ -293,8 +293,8 @@ return {
 			for _ = 1, lines do
 				ya.manager_emit("enter", {})
 				local file_idx = get_cache_or_first_dir()
-				ya.manager_emit("arrow", { -99999999 })
 				if file_idx then
+					ya.manager_emit("arrow", { -99999999 })
 					ya.manager_emit("arrow", { file_idx })
 				end
 			end
