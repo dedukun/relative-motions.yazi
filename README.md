@@ -94,18 +94,19 @@ desc = "Trigger a new relative motion"
 
 Additionally there are a couple of initial configurations that can be given to the plugin's `setup` function:
 
-| Configuration  | Values                                                | Default | Description                                                                                                                        |
-| -------------- | ----------------------------------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `show_numbers` | `relative`, `absolute`, `relative_absolute` or `none` | `none`  | Shows relative or absolute numbers before the file icon                                                                            |
-| `show_motion`  | `true` or `false`                                     | `false` | Shows current motion in Status bar                                                                                                 |
-| `only_motions` | `true` or `false`                                     | `false` | If true, only the motion movements will be enabled, i.e., the commands for delete, cut, yank and visual selection will be disabled |
+| Configuration  | Values                                                | Default          | Description                                                                                                                        |
+| -------------- | ----------------------------------------------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `show_numbers` | `relative`, `absolute`, `relative_absolute` or `none` | `none`           | Shows relative or absolute numbers before the file icon                                                                            |
+| `show_motion`  | `true` or `false`                                     | `false`          | Shows current motion in Status bar                                                                                                 |
+| `only_motions` | `true` or `false`                                     | `false`          | If true, only the motion movements will be enabled, i.e., the commands for delete, cut, yank and visual selection will be disabled |
+| `enter_mode`   | `cache`, `first` or `cache_or_first`                  | `cache_or_first` | The method to enter folders                                                                                                        |
 
 If you want, for example, to enable relative numbers as well as to show the motion in the status bar,
 add the following to Yazi's `init.lua`, i.e. `~/.config/yazi/init.lua`:
 
 ```lua
 -- ~/.config/yazi/init.lua
-require("relative-motions"):setup({ show_numbers="relative", show_motion = true })
+require("relative-motions"):setup({ show_numbers="relative", show_motion = true, enter_mode ="first" })
 ```
 
 > [!NOTE]
@@ -119,13 +120,15 @@ require("relative-motions"):setup({ show_numbers="relative", show_motion = true 
 This plugin adds the some basic vim motions like `3k`, `12j`, `10gg`, etc.
 The following table show all the available motions:
 
-| Command        | Description         |
-| -------------- | ------------------- |
-| `j`/`<Down>`   | Move `n` lines down |
-| `k`/`<Up>`     | Move `n` lines up   |
-| `gj`/`g<Down>` | Go `n` lines down   |
-| `gk`/`g<Up>`   | Go `n` lines up     |
-| `gg`           | Go to line          |
+| Command        | Description           |
+| -------------- | --------------------- |
+| `j`/`<Down>`   | Move `n` lines down   |
+| `k`/`<Up>`     | Move `n` lines up     |
+| `h`/`<Left>`   | Move `n` folders back |
+| `l`/`<Right>`  | Enter `n` folders     |
+| `gj`/`g<Down>` | Go `n` lines down     |
+| `gk`/`g<Up>`   | Go `n` lines up       |
+| `gg`           | Go to line            |
 
 Furthermore, the following operations were also added:
 
