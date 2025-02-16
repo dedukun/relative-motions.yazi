@@ -35,47 +35,47 @@ If you want to use the numbers directly to start a motion add this to your `keym
 ```toml
 [[manager.prepend_keymap]]
 on = [ "1" ]
-run = "plugin relative-motions --args=1"
+run = "plugin relative-motions 1"
 desc = "Move in relative steps"
 
 [[manager.prepend_keymap]]
 on = [ "2" ]
-run = "plugin relative-motions --args=2"
+run = "plugin relative-motions 2"
 desc = "Move in relative steps"
 
 [[manager.prepend_keymap]]
 on = [ "3" ]
-run = "plugin relative-motions --args=3"
+run = "plugin relative-motions 3"
 desc = "Move in relative steps"
 
 [[manager.prepend_keymap]]
 on = [ "4" ]
-run = "plugin relative-motions --args=4"
+run = "plugin relative-motions 4"
 desc = "Move in relative steps"
 
 [[manager.prepend_keymap]]
 on = [ "5" ]
-run = "plugin relative-motions --args=5"
+run = "plugin relative-motions 5"
 desc = "Move in relative steps"
 
 [[manager.prepend_keymap]]
 on = [ "6" ]
-run = "plugin relative-motions --args=6"
+run = "plugin relative-motions 6"
 desc = "Move in relative steps"
 
 [[manager.prepend_keymap]]
 on = [ "7" ]
-run = "plugin relative-motions --args=7"
+run = "plugin relative-motions 7"
 desc = "Move in relative steps"
 
 [[manager.prepend_keymap]]
 on = [ "8" ]
-run = "plugin relative-motions --args=8"
+run = "plugin relative-motions 8"
 desc = "Move in relative steps"
 
 [[manager.prepend_keymap]]
 on = [ "9" ]
-run = "plugin relative-motions --args=9"
+run = "plugin relative-motions 9"
 desc = "Move in relative steps"
 ```
 
