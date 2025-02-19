@@ -220,7 +220,7 @@ local get_cache_or_first_dir = ya.sync(function(state)
 	elseif state._enter_mode == ENTER_MODE_CACHE_OR_FIRST then
 		local hovered_file = cx.active.current.hovered
 
-		if  hovered_file ~= nil and hovered_file.cha.is_dir then
+		if hovered_file ~= nil and hovered_file.cha.is_dir then
 			return cx.active.current.cursor
 		end
 	end
@@ -263,7 +263,7 @@ return {
 
 		if cmd == "g" then
 			if direction == "g" then
-				ya.manager_emit("arrow", { -99999999 })
+				ya.manager_emit("arrow", { "top" })
 				ya.manager_emit("arrow", { lines - 1 })
 				render_clear()
 				return
@@ -295,7 +295,7 @@ return {
 				ya.manager_emit("enter", {})
 				local file_idx = get_cache_or_first_dir()
 				if file_idx then
-					ya.manager_emit("arrow", { -99999999 })
+					ya.manager_emit("arrow", { "top" })
 					ya.manager_emit("arrow", { file_idx })
 				end
 			end
