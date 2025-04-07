@@ -106,13 +106,13 @@ local render_numbers = ya.sync(function(_, mode)
 			end
 		end
 
-        local num_format = "%" .. #tostring(total) .. "d"
+		local num_format = "%" .. #tostring(total) .. "d"
 
 		-- emulate vim's hovered offset
 		if hovered == index then
 			return ui.Span(string.format(num_format .. " ", idx))
 		else
-			return ui.Span(string.format(" " .. num_format , idx))
+			return ui.Span(string.format(" " .. num_format, idx))
 		end
 	end
 
@@ -124,7 +124,13 @@ local render_numbers = ya.sync(function(_, mode)
 
 		local hovered_index
 		for i, f in ipairs(files) do
-			if f:is_hovered() then
+			-- TODO: Removed f:is_hovered() support in next Yazi release
+			if type(f.is_hovered) == "boolean" then
+				hovered = f.is_hovered
+			else
+				hovered = f:is_hovered()
+			end
+			if hovered then
 				hovered_index = i
 				break
 			end
@@ -135,7 +141,8 @@ local render_numbers = ya.sync(function(_, mode)
 			linemodes[#linemodes + 1] = Linemode:new(f):redraw()
 
 			local entity = Entity:new(f)
-			entities[#entities + 1] = ui.Line({ Entity:number(i, #self._folder.files, f, hovered_index), entity:redraw() }):style(entity:style())
+			entities[#entities + 1] = ui.Line({ Entity:number(i, #self._folder.files, f, hovered_index), entity:redraw() })
+				:style(entity:style())
 		end
 
 		return {
