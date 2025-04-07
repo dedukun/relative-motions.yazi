@@ -92,7 +92,7 @@ end)
 local render_numbers = ya.sync(function(_, mode)
 	ya.render()
 
-	Entity.number = function(_, index, file, hovered)
+	Entity.number = function(_, index, total, file, hovered)
 		local idx
 		if mode == SHOW_NUMBERS_RELATIVE then
 			idx = math.abs(hovered - index)
@@ -106,13 +106,13 @@ local render_numbers = ya.sync(function(_, mode)
 			end
 		end
 
+        local num_format = "%" .. #tostring(total) .. "d"
+
 		-- emulate vim's hovered offset
-		if idx >= 100 then
-			return ui.Span(string.format("%4d ", idx))
-		elseif hovered == index then
-			return ui.Span(string.format("%3d  ", idx))
+		if hovered == index then
+			return ui.Span(string.format(num_format .. " ", idx))
 		else
-			return ui.Span(string.format(" %3d ", idx))
+			return ui.Span(string.format(" " .. num_format , idx))
 		end
 	end
 
@@ -135,7 +135,7 @@ local render_numbers = ya.sync(function(_, mode)
 			linemodes[#linemodes + 1] = Linemode:new(f):redraw()
 
 			local entity = Entity:new(f)
-			entities[#entities + 1] = ui.Line({ Entity:number(i, f, hovered_index), entity:redraw() }):style(entity:style())
+			entities[#entities + 1] = ui.Line({ Entity:number(i, #self._folder.files, f, hovered_index), entity:redraw() }):style(entity:style())
 		end
 
 		return {
