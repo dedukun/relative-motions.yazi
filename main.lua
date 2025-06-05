@@ -1,4 +1,4 @@
---- @since 25.4.8
+--- @since 25.5.28
 -- stylua: ignore
 local MOTIONS_AND_OP_KEYS = {
 	{ on = "0" }, { on = "1" }, { on = "2" }, { on = "3" }, { on = "4" },
@@ -141,7 +141,7 @@ local render_numbers = ya.sync(function(_, mode)
 
 		return {
 			ui.List(entities):area(self._area),
-			ui.Text(linemodes):area(self._area):align(ui.Text.RIGHT),
+			ui.Text(linemodes):area(self._area):align(ui.Align.RIGHT),
 		}
 	end
 end)
