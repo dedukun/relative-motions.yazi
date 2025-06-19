@@ -11,7 +11,7 @@ A [Yazi](https://github.com/sxyazi/yazi) plugin based about vim motions.
 ## Installation
 
 ```sh
-ya pkg -a dedukun/relative-motions
+ya pkg add dedukun/relative-motions
 ```
 
 ## Configuration
