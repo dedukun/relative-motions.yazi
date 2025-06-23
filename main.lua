@@ -80,10 +80,18 @@ local render_motion = ya.sync(function(_, motion_num, motion_cmd)
 		local separator_open = status_config.sep_right.open
 		local separator_close = status_config.sep_right.close
 
+		-- TODO: REMOVE THIS IN NEXT RELEASE
+		local bg_style
+		if type(style.main.bg) == "function" then
+			bg_style = style.main:bg()
+		else
+			bg_style = style.main.bg
+		end
+
 		return ui.Line {
-			ui.Span(separator_open):fg(style.main.bg),
+			ui.Span(separator_open):fg(bg_style),
 			motion_span:style(style.main),
-			ui.Span(separator_close):fg(style.main.bg),
+			ui.Span(separator_close):fg(bg_style),
 			ui.Span(" "),
 		}
 	end
