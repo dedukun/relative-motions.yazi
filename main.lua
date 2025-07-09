@@ -40,7 +40,11 @@ local ENTER_MODE_CACHE_OR_FIRST = 2
 -----------------------------------------------
 
 local render_motion_setup = ya.sync(function(_)
-	ya.render()
+	if ui.render then
+		ui.render()
+	else
+		ya.render()
+	end
 
 	Status.motion = function() return ui.Span("") end
 
@@ -60,7 +64,11 @@ local render_motion_setup = ya.sync(function(_)
 end)
 
 local render_motion = ya.sync(function(_, motion_num, motion_cmd)
-	ya.render()
+	if ui.render then
+		ui.render()
+	else
+		ya.render()
+	end
 
 	Status.motion = function(self)
 		if not motion_num then
@@ -98,7 +106,11 @@ local render_motion = ya.sync(function(_, motion_num, motion_cmd)
 end)
 
 local render_numbers = ya.sync(function(_, mode)
-	ya.render()
+	if ui.render then
+		ui.render()
+	else
+		ya.render()
+	end
 
 	Entity.number = function(_, index, total, file, hovered)
 		local idx
