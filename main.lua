@@ -156,7 +156,7 @@ local render_numbers = ya.sync(function(_, mode)
             left[#left + 1], right[#right + 1] = ui.Line({ Entity:number(_, #self._folder.files, f, hovered_index), entity:redraw() }):style(entity:style()), Linemode:new(f):redraw()
 
             local max = math.max(0, self._area.w - right[#right]:width())
-            left[#left]:truncate { max = max, ellipsis = entity:ellipsis(max) }
+            left[#left]:truncate { max = max, ellipsis = entity:ellipsis(max - #tostring(total)) }
         end
 
         return {
