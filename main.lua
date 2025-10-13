@@ -136,34 +136,34 @@ local render_numbers = ya.sync(function(_, mode)
 		end
 	end
 
-	Current.redraw = function(self)
-		local files = self._folder.window
-		if #files == 0 then
-			return self:empty()
-		end
+    Current.redraw = function(self)
+        local files = self._folder.window
+        if #files == 0 then
+            return self:empty()
+        end
 
-		local hovered_index
-		for i, f in ipairs(files) do
-			if f.is_hovered then
-				hovered_index = i
-				break
-			end
-		end
+        local hovered_index
+        for i, f in ipairs(files) do
+            if f.is_hovered then
+                hovered_index = i
+                break
+            end
+        end
 
-		local entities, linemodes = {}, {}
-		for i, f in ipairs(files) do
-			linemodes[#linemodes + 1] = Linemode:new(f):redraw()
+        local left, right = {}, {}
+        for _, f in ipairs(files) do
+            local entity = Entity:new(f)
+            left[#left + 1], right[#right + 1] = ui.Line({ Entity:number(_, #self._folder.files, f, hovered_index), entity:redraw() }):style(entity:style()), Linemode:new(f):redraw()
 
-			local entity = Entity:new(f)
-			entities[#entities + 1] = ui.Line({ Entity:number(i, #self._folder.files, f, hovered_index), entity:redraw() })
-				:style(entity:style())
-		end
+            local max = math.max(0, self._area.w - right[#right]:width())
+            left[#left]:truncate { max = max, ellipsis = entity:ellipsis(max - #tostring(total)) }
+        end
 
-		return {
-			ui.List(entities):area(self._area),
-			ui.Text(linemodes):area(self._area):align(ui.Align.RIGHT),
-		}
-	end
+        return {
+            ui.List(left):area(self._area),
+            ui.Text(right):area(self._area):align(ui.Align.RIGHT),
+        }
+    end
 end)
 
 local function render_clear() render_motion() end
